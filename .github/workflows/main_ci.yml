@@ -1,0 +1,15 @@
+name: main_ci
+
+on:  push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions?checkout@v3
+      - run: pip install poetry
+      - run: make install
+      - name: start linter
+        run: make lint
+      - name: make test
+        run: make test
