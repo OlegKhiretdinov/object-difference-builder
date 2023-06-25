@@ -6,7 +6,8 @@ from gendiff.get_file_content import get_file_content
 
 def main():
     args = get_args()
-    file1_data, file2_data = get_file_content(args.first_file, args.second_file)
+    file1_data = get_file_content(args.first_file)
+    file2_data = get_file_content(args.second_file)
     return get_dict_diff(file1_data, file2_data)
 
 
