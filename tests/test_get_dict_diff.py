@@ -10,3 +10,6 @@ test_file.close()
 def test_diff_json():
     result = get_dict_diff(dict_1, dict_2)
     assert result == test_data
+
+# Отсавь тесты для поских списков?
+# Или сделать сразу для вложенных?

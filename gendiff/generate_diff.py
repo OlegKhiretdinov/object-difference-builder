@@ -11,4 +11,3 @@ def generate_diff(first_file, second_file, dif_format):
     match dif_format:
         case _:
             return stylish(diff)
-
