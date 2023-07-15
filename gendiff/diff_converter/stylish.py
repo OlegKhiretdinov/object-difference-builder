@@ -1,4 +1,11 @@
-from gendiff.consts import JSON_DIFF_PREFIX, INDENT, PROPERTY_STATUS
+from gendiff.consts import JSON_PREFIX, INDENT, PROPERTY_STATUS,\
+    STATUS_VALUES_RELATION
+
+
+def handle_none_pristine(name, status, value, children):
+    name_str = f'{JSON_PREFIX[status]}{name}:'
+    prop_str = f' {children or value[STATUS_VALUES_RELATION[status]]}'
+    return f'{name_str}{prop_str if prop_str != " " else ""}'
 
 
 def stylish(diff, level=1):
@@ -6,42 +13,44 @@ def stylish(diff, level=1):
 
     for prop in diff:
         values = prop["values"]
+        status = prop["status"]
+        prop_name = prop["name"]
         children = stylish(values, level + 1) if isinstance(values, list)\
             else None
 
         result += f'{INDENT * (level * 2 - 1)}'
 
-        if prop["status"] == PROPERTY_STATUS.ADDED:
-            result += f'{JSON_DIFF_PREFIX.ADD}' \
-                      f'{prop["name"]}: {children or values["current"]}'
-        elif prop["status"] == PROPERTY_STATUS.DELETED:
-            result += f'{JSON_DIFF_PREFIX.DELETE}' \
-                      f'{prop["name"]}: {children or values["initial"]}'
-        elif prop["status"] == PROPERTY_STATUS.PRISTINE:
-            result += f'{JSON_DIFF_PREFIX.PRISTINE}' \
-                      f'{prop["name"]}: {children or values["initial"]}'
-        elif prop["status"] == PROPERTY_STATUS.CHANGED:
+        if status != PROPERTY_STATUS.CHANGED:
+            result += handle_none_pristine(prop_name, status, values, children)
+        else:
             if children:
-                result += f'{JSON_DIFF_PREFIX.PRISTINE}' \
+                result += f'{JSON_PREFIX[PROPERTY_STATUS.PRISTINE]}' \
                           f'{prop["name"]}: {children}'
             else:
-                initial = stylish(values["initial"], level + 1)\
+                initial_children = stylish(values["initial"], level + 1)\
                     if isinstance(values["initial"], list) \
-                    else values["initial"]
-                current = stylish(values["current"], level + 1)\
+                    else None
+                current_children = stylish(values["current"], level + 1)\
                     if isinstance(values["current"], list) \
-                    else values["current"]
+                    else None
 
-                result += f'{JSON_DIFF_PREFIX.DELETE}{prop["name"]}: ' \
-                          f'{initial }\n'
-                result += f'{INDENT * (level * 2 - 1)}{JSON_DIFF_PREFIX.ADD}' \
-                          f'{prop["name"]}: {current}'
+                result += handle_none_pristine(
+                    prop_name,
+                    PROPERTY_STATUS.DELETED,
+                    values,
+                    initial_children
+                ) + f'\n{INDENT * (level * 2 - 1)}'
+
+                result += handle_none_pristine(
+                    prop_name,
+                    PROPERTY_STATUS.ADDED,
+                    values,
+                    current_children
+                )
         result += '\n'
 
     result += f'{INDENT * (level - 1) * 2}{"}"}'
 
-    asd = result.replace(": False", ": false")\
+    return result.replace(": False", ": false")\
         .replace(": True", ": true")\
         .replace(": None", ": null")
-
-    return asd
