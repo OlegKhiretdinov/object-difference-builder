@@ -40,4 +40,8 @@ def stylish(diff, level=1):
 
     result += f'{INDENT * (level - 1) * 2}{"}"}'
 
-    return result
+    asd = result.replace(": False", ": false")\
+        .replace(": True", ": true")\
+        .replace(": None", ": null")
+
+    return asd
