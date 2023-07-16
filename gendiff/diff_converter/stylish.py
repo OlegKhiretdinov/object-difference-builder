@@ -5,7 +5,7 @@ from gendiff.consts import JSON_PREFIX, INDENT, PROPERTY_STATUS,\
 def handle_none_pristine(name, status, value, children):
     name_str = f'{JSON_PREFIX[status]}{name}:'
     prop_str = f' {children or value[STATUS_VALUES_RELATION[status]]}'
-    return f'{name_str}{prop_str if prop_str != " " else ""}'
+    return f'{name_str}{prop_str}'
 
 
 def stylish(diff, level=1):
