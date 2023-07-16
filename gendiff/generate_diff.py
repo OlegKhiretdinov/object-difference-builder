@@ -5,7 +5,7 @@ from gendiff.diff_converter.plain import plain
 from gendiff.diff_converter.to_json import to_json
 
 
-def generate_diff(first_file, second_file, dif_format):
+def generate_diff(first_file, second_file, dif_format="stylish"):
     file1_data = get_file_content(first_file)
     file2_data = get_file_content(second_file)
     diff = get_dict_diff(file1_data, file2_data)
