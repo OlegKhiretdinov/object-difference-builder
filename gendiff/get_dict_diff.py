@@ -25,6 +25,32 @@ dif_example = [
 from gendiff.consts import PROPERTY_STATUS
 
 
+def get_changed_values(name, dict_1, dict_2):
+    is_prop_1_dict = isinstance(dict_1[name], dict)
+    is_prop_2_dict = isinstance(dict_2[name], dict)
+
+    # оба свойства строки
+    values = {
+        "initial": dict_1[name],
+        "current": dict_2[name]
+    }
+
+    if is_prop_1_dict and is_prop_2_dict:
+        values = get_dict_diff(dict_1[name], dict_2[name])
+    elif is_prop_1_dict and not is_prop_2_dict:
+        values = {
+            "initial": get_dict_diff(dict_1[name], dict_1[name]),
+            "current": dict_2[name]
+        }
+    elif not is_prop_2_dict and is_prop_2_dict:
+        values = {
+            "initial": dict_1[name],
+            "current": get_dict_diff(dict_2[name], dict_2[name])
+        }
+
+    return values
+
+
 def get_dict_diff(dict_1, dict_2):
     keys1 = list(dict_1)
     keys2 = list(dict_2)
@@ -46,28 +72,7 @@ def get_dict_diff(dict_1, dict_2):
                 else {"initial": dict_1[i]}
         else:
             prop_description["status"] = PROPERTY_STATUS.CHANGED
-            is_prop_1_dict = isinstance(dict_1[i], dict)
-            is_prop_2_dict = isinstance(dict_2[i], dict)
-
-            # оба свойства строки
-            values = {
-                "initial": dict_1[i],
-                "current": dict_2[i]
-            }
-            if is_prop_1_dict and is_prop_2_dict:
-                values = get_dict_diff(dict_1[i], dict_2[i])
-            elif is_prop_1_dict and not is_prop_2_dict:
-                values = {
-                    "initial": get_dict_diff(dict_1[i], dict_1[i]),
-                    "current": dict_2[i]
-                }
-            elif not is_prop_2_dict and is_prop_2_dict:
-                values = {
-                    "initial": dict_1[i],
-                    "current": get_dict_diff(dict_2[i], dict_2[i])
-                }
-
-            prop_description["values"] = values
+            prop_description["values"] = get_changed_values(i, dict_1, dict_2)
 
         dict_dif.append(prop_description)
 
