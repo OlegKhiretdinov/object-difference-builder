@@ -20,4 +20,11 @@ Poetry 1.4
 
 For help run `gendiff -h`
 
-[work example](https://asciinema.org/a/ppJ4FBKkNB0ukvEiR9unpOIbd)
+### Work example
+[show help](https://asciinema.org/a/tdQeLSS6QMBNXfPcjd85LkE9Z)
+
+[default stylish format](https://asciinema.org/a/Vq3VglHyvSR6hUOdKkDwpjMyf)
+
+[plain format](https://asciinema.org/a/ODaKvxxsBVxkZpqPEBxm8dyLg)
+
+[json format](https://asciinema.org/a/K0bVlckgI5ghjPAYf72kVV8p8)
