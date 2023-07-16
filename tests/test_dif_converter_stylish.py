@@ -1,5 +1,5 @@
 from gendiff.diff_converter.stylish import stylish
-from tests.fixtures.diff_eample import diff_example
+from tests.fixtures.diff_example import diff_example
 
 
 file = open("tests/fixtures/stylish_result.txt")

@@ -9,9 +9,6 @@ PROPERTY_STATUS = STATUS(
     CHANGED="changed"
 )
 
-# PREFIX = namedtuple("PREFIX", ["ADD", "DELETE", "PRISTINE"])
-# JSON_PREFIX = PREFIX(ADD="+ ", DELETE="- ", PRISTINE="  ")
-
 # Stylish
 JSON_PREFIX = {
     PROPERTY_STATUS.ADDED: "+ ",

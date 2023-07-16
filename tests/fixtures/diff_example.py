@@ -77,8 +77,11 @@ diff_example = [
                      {'name': 'key',
                       'status': 'pristine',
                       'values': {'initial': 'value'}
-                      }],
-                 'current': 'str'}}
+                      }
+                 ],
+                 'current': 'str'
+             }
+         }
      ]},
     {
         'name': 'group2',
