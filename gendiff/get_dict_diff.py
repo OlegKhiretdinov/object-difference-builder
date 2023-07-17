@@ -42,7 +42,7 @@ def get_changed_values(name, dict_1, dict_2):
             "initial": get_dict_diff(dict_1[name], dict_1[name]),
             "current": dict_2[name]
         }
-    elif not is_prop_2_dict and is_prop_2_dict:
+    elif not is_prop_1_dict and is_prop_2_dict:
         values = {
             "initial": dict_1[name],
             "current": get_dict_diff(dict_2[name], dict_2[name])
