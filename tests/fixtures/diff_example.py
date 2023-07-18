@@ -30,7 +30,10 @@ diff_example = [
             'name': 'setting5',
             'status': 'added',
             'values': [
-                {'name': 'key5', 'status': 'pristine', 'values': {'initial': 'value5'}}
+                {'name': 'key5',
+                 'status': 'pristine',
+                 'values': {'initial': 'value5'}
+                 }
             ]
         },
         {
@@ -41,7 +44,10 @@ diff_example = [
                     'name': 'doge',
                     'status': 'changed',
                     'values': [
-                        {'name': 'wow', 'status': 'changed', 'values': {'initial': '', 'current': 'so much'}}
+                        {'name': 'wow',
+                         'status': 'changed',
+                         'values': {'initial': '', 'current': 'so much'}
+                         }
                     ]
                 },
                 {
@@ -95,7 +101,13 @@ diff_example = [
             {
                 'name': 'deep',
                 'status': 'pristine',
-                'values': [{'name': 'id', 'status': 'pristine', 'values': {'initial': 45}}]}
+                'values': [
+                    {'name': 'id',
+                     'status': 'pristine',
+                     'values': {'initial': 45}
+                     }
+                ]
+            }
         ]
     },
     {
