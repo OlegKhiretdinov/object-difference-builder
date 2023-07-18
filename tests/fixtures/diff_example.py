@@ -2,78 +2,78 @@ diff_example = [
     {'name': 'common',
      'status': 'changed',
      'values': [
-        {
-            'name': 'follow',
-            'status': 'added',
-            'values': {'current': False}
-        },
-        {
-            'name': 'setting1',
-            'status': 'pristine',
-            'values': {'initial': 'Value 1'}
-        },
-        {
-            'name': 'setting2',
-            'status': 'deleted',
-            'values': {'initial': 200}
-        },
-        {
-            'name': 'setting3',
-            'status': 'changed',
-            'values': {'initial': True, 'current': None}},
-        {
-            'name': 'setting4',
-            'status': 'added',
-            'values': {'current': 'blah blah'}
-        },
-        {
-            'name': 'setting5',
-            'status': 'added',
-            'values': [
-                {'name': 'key5',
-                 'status': 'pristine',
-                 'values': {'initial': 'value5'}
-                 }
-            ]
-        },
-        {
-            'name': 'setting6',
-            'status': 'changed',
-            'values': [
-                {
-                    'name': 'doge',
-                    'status': 'changed',
-                    'values': [
-                        {'name': 'wow',
-                         'status': 'changed',
-                         'values': {'initial': '', 'current': 'so much'}
-                         }
-                    ]
-                },
-                {
-                    'name': 'key',
-                    'status': 'pristine',
-                    'values': {'initial': 'value'}
-                },
-                {
-                    'name': 'ops',
-                    'status': 'added',
-                    'values': {'current': 'vops'}}
-            ]
-        }
+         {
+             'name': 'follow',
+             'status': 'added',
+             'values': {'current': False}
+         },
+         {
+             'name': 'setting1',
+             'status': 'pristine',
+             'values': {'initial': 'Value 1'}
+         },
+         {
+             'name': 'setting2',
+             'status': 'deleted',
+             'values': {'initial': 200}
+         },
+         {
+             'name': 'setting3',
+             'status': 'changed',
+             'values': {'initial': True, 'current': None}},
+         {
+             'name': 'setting4',
+             'status': 'added',
+             'values': {'current': 'blah blah'}
+         },
+         {
+             'name': 'setting5',
+             'status': 'added',
+             'values': [
+                 {'name': 'key5',
+                  'status': 'pristine',
+                  'values': {'initial': 'value5'}
+                  }
+             ]
+         },
+         {
+             'name': 'setting6',
+             'status': 'changed',
+             'values': [
+                 {
+                     'name': 'doge',
+                     'status': 'changed',
+                     'values': [
+                         {'name': 'wow',
+                          'status': 'changed',
+                          'values': {'initial': '', 'current': 'so much'}
+                          }
+                     ]
+                 },
+                 {
+                     'name': 'key',
+                     'status': 'pristine',
+                     'values': {'initial': 'value'}
+                 },
+                 {
+                     'name': 'ops',
+                     'status': 'added',
+                     'values': {'current': 'vops'}}
+             ]
+         }
      ]},
     {'name': 'group1',
      'status': 'changed',
      'values': [
          {
-                'name': 'baz',
-                'status': 'changed',
-                'values': {'initial': 'bas', 'current': 'bars'}
-          },
+             'name': 'baz',
+             'status': 'changed',
+             'values': {'initial': 'bas', 'current': 'bars'}
+         },
          {
-            'name': 'foo',
-            'status': 'pristine',
-            'values': {'initial': 'bar'}
+             'name': 'foo',
+             'status': 'pristine',
+             'values': {'initial': 'bar'}
          },
          {
              'name': 'nest',
