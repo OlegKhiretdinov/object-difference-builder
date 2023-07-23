@@ -1,10 +1,12 @@
+import pytest
 from gendiff.diff_converter.plain import plain
-from tests.fixtures.diff_example import diff_example
 
 
-file = open("tests/fixtures/plain_result.txt")
-plain_string = file.read()
+@pytest.fixture
+def resul_string():
+    file = open("tests/fixtures/plain_result.txt")
+    return file.read()
 
 
-def test_plain_converter():
-    assert plain(diff_example) == plain_string
+def test_converter(resul_string, diff_example):
+    assert plain(diff_example) == resul_string
