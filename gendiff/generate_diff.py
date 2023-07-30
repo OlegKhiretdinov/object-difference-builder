@@ -14,7 +14,6 @@ def get_file_content(path):
 
 def generate_diff(first_file, second_file, dif_format="stylish"):
     first_parsed_data = get_file_content(first_file)
-    print(first_parsed_data)
     second_parsed_data = get_file_content(second_file)
     diff = get_dict_diff(first_parsed_data, second_parsed_data)
 
