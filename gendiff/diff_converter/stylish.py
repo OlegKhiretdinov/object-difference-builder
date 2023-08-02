@@ -1,5 +1,16 @@
-from gendiff.consts import JSON_PREFIX, INDENT, PROPERTY_STATUS,\
-    STATUS_VALUES_RELATION
+STATUS_VALUES_RELATION = {
+    "added": "current",
+    "deleted": "initial",
+    "pristine": "initial",
+}
+
+JSON_PREFIX = {
+    "added": "+ ",
+    "deleted": "- ",
+    "pristine": "  ",
+}
+
+INDENT = "  "
 
 
 def handle_none_pristine(name, status, value, children):
@@ -20,11 +31,11 @@ def stylish(diff, level=1):
 
         result += f'{INDENT * (level * 2 - 1)}'
 
-        if status != PROPERTY_STATUS.CHANGED:
+        if status != "changed":
             result += handle_none_pristine(prop_name, status, values, children)
         else:
             if children:
-                result += f'{JSON_PREFIX[PROPERTY_STATUS.PRISTINE]}' \
+                result += f'{JSON_PREFIX["pristine"]}' \
                           f'{prop["name"]}: {children}'
             else:
                 initial_children = stylish(values["initial"], level + 1)\
@@ -36,14 +47,14 @@ def stylish(diff, level=1):
 
                 result += handle_none_pristine(
                     prop_name,
-                    PROPERTY_STATUS.DELETED,
+                    "deleted",
                     values,
                     initial_children
                 ) + f'\n{INDENT * (level * 2 - 1)}'
 
                 result += handle_none_pristine(
                     prop_name,
-                    PROPERTY_STATUS.ADDED,
+                    "added",
                     values,
                     current_children
                 )

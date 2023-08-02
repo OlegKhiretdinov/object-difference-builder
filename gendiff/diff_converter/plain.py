@@ -1,5 +1,4 @@
 from string import Template
-from gendiff.consts import PROPERTY_STATUS
 
 
 ADDED_TMPL = Template("Property '$name' was added with value: $value")
@@ -26,29 +25,28 @@ def plain(diff, parent_name=""):
         name = f'{parent_name}{"." if parent_name else ""}{prop["name"]}'
         values = prop["values"]
 
-        match status:
-            case PROPERTY_STATUS.DELETED:
-                result.append(DELETED_TMPL.substitute(name=name))
-            case PROPERTY_STATUS.ADDED:
+        if status == "deleted":
+            result.append(DELETED_TMPL.substitute(name=name))
+        elif status == "added":
+            result.append(
+                ADDED_TMPL.substitute(
+                    name=name,
+                    value=get_string_value(values, "current")
+                )
+            )
+        elif status == "changed":
+            if isinstance(values, list):
+                result.append(plain(prop["values"], parent_name=name))
+            else:
                 result.append(
-                    ADDED_TMPL.substitute(
+                    CHANGED_TMPL.substitute(
                         name=name,
-                        value=get_string_value(values, "current")
+                        init_value=get_string_value(values, "initial"),
+                        current_value=get_string_value(values, "current")
                     )
                 )
-            case PROPERTY_STATUS.CHANGED:
-                if isinstance(values, list):
-                    result.append(plain(prop["values"], parent_name=name))
-                else:
-                    result.append(
-                        CHANGED_TMPL.substitute(
-                            name=name,
-                            init_value=get_string_value(values, "initial"),
-                            current_value=get_string_value(values, "current")
-                        )
-                    )
-            case _:
-                pass
+        else:
+            pass
 
     return '\n'.join(result)\
         .replace(" False", " false")\

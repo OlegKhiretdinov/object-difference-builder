@@ -22,8 +22,6 @@ dif_example = [
 ]
 """
 
-from gendiff.consts import PROPERTY_STATUS
-
 
 def get_changed_values(name, dict_1, dict_2):
     is_prop_1_dict = isinstance(dict_1[name], dict)
@@ -61,17 +59,17 @@ def get_dict_diff(dict_1, dict_2):
     for i in keys1:
         prop_description = {"name": i}
         if i not in keys2:
-            prop_description["status"] = PROPERTY_STATUS.DELETED
+            prop_description["status"] = "deleted"
             prop_description["values"] = get_dict_diff(dict_1[i], dict_1[i])\
                 if isinstance(dict_1[i], dict)\
                 else {"initial": dict_1[i]}
         elif dict_1[i] == dict_2[i]:
-            prop_description["status"] = PROPERTY_STATUS.PRISTINE
+            prop_description["status"] = "pristine"
             prop_description["values"] = get_dict_diff(dict_1[i], dict_2[i])\
                 if isinstance(dict_1[i], dict)\
                 else {"initial": dict_1[i]}
         else:
-            prop_description["status"] = PROPERTY_STATUS.CHANGED
+            prop_description["status"] = "changed"
             prop_description["values"] = get_changed_values(i, dict_1, dict_2)
 
         dict_dif.append(prop_description)
@@ -79,7 +77,7 @@ def get_dict_diff(dict_1, dict_2):
     for i in keys2:
         if i not in keys1:
             prop_description = {"name": i}
-            prop_description["status"] = PROPERTY_STATUS.ADDED
+            prop_description["status"] = "added"
             prop_description["values"] = get_dict_diff(dict_2[i], dict_2[i])\
                 if isinstance(dict_2[i], dict)\
                 else {"current": dict_2[i]}
