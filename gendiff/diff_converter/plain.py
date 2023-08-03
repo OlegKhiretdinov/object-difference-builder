@@ -81,5 +81,3 @@ ddd = [
             'values': {'current': True}
         }
     ]
-
-print(plain(ddd))
