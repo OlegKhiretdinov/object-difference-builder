@@ -174,7 +174,6 @@ def diff_example_2():
     ]
 
 
-
 @pytest.fixture()
 def dict_1():
     return {
