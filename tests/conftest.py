@@ -144,6 +144,38 @@ def diff_example():
 
 
 @pytest.fixture()
+def diff_example_2():
+    return [
+        {
+            'name': 'follow',
+            'status': 'deleted',
+            'values': {'initial': False}
+        },
+        {
+            'name': 'host',
+            'status': 'pristine',
+            'values': {'initial': 'hexlet.io'}
+        },
+        {
+            'name': 'proxy',
+            'status': 'deleted',
+            'values': {'initial': '123.234.53.22'}
+        },
+        {
+            'name': 'timeout',
+            'status': 'changed',
+            'values': {'initial': 50, 'current': 20}
+        },
+        {
+            'name': 'verbose',
+            'status': 'added',
+            'values': {'current': True}
+        }
+    ]
+
+
+
+@pytest.fixture()
 def dict_1():
     return {
         "common": {
