@@ -6,9 +6,8 @@ from gendiff.diff_converter.to_json import to_json
 
 
 def get_file_content(path):
-    file = open(path)
-    parsed_data = parser(file.read(), path.split(".")[-1])
-    file.close()
+    with open(path) as f:
+        parsed_data = parser(f.read(), path.split(".")[-1])
     return parsed_data
 
 
