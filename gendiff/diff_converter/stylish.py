@@ -1,13 +1,16 @@
+from gendiff.get_dict_diff import ADDED, DELETED, CHANGED, PRISTINE
+
+
 STATUS_VALUES_RELATION = {
-    "added": "current",
-    "deleted": "initial",
-    "pristine": "initial",
+    ADDED: "current",
+    DELETED: "initial",
+    PRISTINE: "initial",
 }
 
 JSON_PREFIX = {
-    "added": "+ ",
-    "deleted": "- ",
-    "pristine": "  ",
+    ADDED: "+ ",
+    DELETED: "- ",
+    PRISTINE: "  ",
 }
 
 INDENT = "  "
@@ -31,11 +34,11 @@ def stylish(diff, level=1):
 
         result += f'{INDENT * (level * 2 - 1)}'
 
-        if status != "changed":
+        if status != CHANGED:
             result += handle_none_pristine(prop_name, status, values, children)
         else:
             if children:
-                result += f'{JSON_PREFIX["pristine"]}' \
+                result += f'{JSON_PREFIX[PRISTINE]}' \
                           f'{prop["key"]}: {children}'
             else:
                 initial_children = stylish(values["initial"], level + 1)\
@@ -47,14 +50,14 @@ def stylish(diff, level=1):
 
                 result += handle_none_pristine(
                     prop_name,
-                    "deleted",
+                    DELETED,
                     values,
                     initial_children
                 ) + f'\n{INDENT * (level * 2 - 1)}'
 
                 result += handle_none_pristine(
                     prop_name,
-                    "added",
+                    ADDED,
                     values,
                     current_children
                 )

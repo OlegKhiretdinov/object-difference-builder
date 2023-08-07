@@ -21,6 +21,10 @@ dif_example = [
     }
 ]
 """
+ADDED = "added"
+DELETED = "deleted"
+PRISTINE = "pristine"
+CHANGED = "changed"
 
 
 def get_changed_values(name, dict_1, dict_2):
@@ -59,17 +63,17 @@ def get_dict_diff(dict_1, dict_2):
     for key in keys1:
         prop_desc = {"key": key}
         if key not in keys2:
-            prop_desc["status"] = "deleted"
+            prop_desc["status"] = DELETED
             prop_desc["values"] = get_dict_diff(dict_1[key], dict_1[key])\
                 if isinstance(dict_1[key], dict)\
                 else {"initial": dict_1[key]}
         elif dict_1[key] == dict_2[key]:
-            prop_desc["status"] = "pristine"
+            prop_desc["status"] = PRISTINE
             prop_desc["values"] = get_dict_diff(dict_1[key], dict_2[key])\
                 if isinstance(dict_1[key], dict)\
                 else {"initial": dict_1[key]}
         else:
-            prop_desc["status"] = "changed"
+            prop_desc["status"] = CHANGED
             prop_desc["values"] = get_changed_values(key, dict_1, dict_2)
 
         dict_dif.append(prop_desc)
@@ -77,7 +81,7 @@ def get_dict_diff(dict_1, dict_2):
     for key in keys2:
         if key not in keys1:
             prop_desc = {"key": key}
-            prop_desc["status"] = "added"
+            prop_desc["status"] = ADDED
             prop_desc["values"] = get_dict_diff(dict_2[key], dict_2[key])\
                 if isinstance(dict_2[key], dict)\
                 else {"current": dict_2[key]}

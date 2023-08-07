@@ -1,4 +1,5 @@
 from string import Template
+from gendiff.get_dict_diff import ADDED, DELETED, CHANGED
 
 
 ADDED_TMPL = Template("Property '$name' was added with value: $value")
@@ -25,16 +26,16 @@ def plain(diff, parent_name=""):
         name = f'{parent_name}{"." if parent_name else ""}{prop["key"]}'
         values = prop["values"]
 
-        if status == "deleted":
+        if status == DELETED:
             result.append(DELETED_TMPL.substitute(name=name))
-        elif status == "added":
+        elif status == ADDED:
             result.append(
                 ADDED_TMPL.substitute(
                     name=name,
                     value=get_string_value(values, "current")
                 )
             )
-        elif status == "changed":
+        elif status == CHANGED:
             if isinstance(values, list):
                 result.append(plain(prop["values"], parent_name=name))
             else:
