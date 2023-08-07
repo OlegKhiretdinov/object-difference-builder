@@ -11,15 +11,17 @@ def get_file_content(path):
     return parsed_data
 
 
-def generate_diff(first_file, second_file, dif_format="stylish"):
+def generate_diff(first_file, second_file, output_format="stylish"):
     first_parsed_data = get_file_content(first_file)
     second_parsed_data = get_file_content(second_file)
     diff = get_dict_diff(first_parsed_data, second_parsed_data)
 
-    match dif_format:
+    match output_format:
         case "plain":
             return plain(diff)
         case "json":
             return to_json(diff)
-        case _:
+        case "stylish":
             return stylish(diff)
+        case _:
+            return None
