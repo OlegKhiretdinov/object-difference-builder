@@ -57,31 +57,31 @@ def get_dict_diff(dict_1, dict_2):
     dict_dif = []
 
     for key in keys1:
-        prop_description = {"key": key}
+        prop_desc = {"key": key}
         if key not in keys2:
-            prop_description["status"] = "deleted"
-            prop_description["values"] = get_dict_diff(dict_1[key], dict_1[key])\
+            prop_desc["status"] = "deleted"
+            prop_desc["values"] = get_dict_diff(dict_1[key], dict_1[key])\
                 if isinstance(dict_1[key], dict)\
                 else {"initial": dict_1[key]}
         elif dict_1[key] == dict_2[key]:
-            prop_description["status"] = "pristine"
-            prop_description["values"] = get_dict_diff(dict_1[key], dict_2[key])\
+            prop_desc["status"] = "pristine"
+            prop_desc["values"] = get_dict_diff(dict_1[key], dict_2[key])\
                 if isinstance(dict_1[key], dict)\
                 else {"initial": dict_1[key]}
         else:
-            prop_description["status"] = "changed"
-            prop_description["values"] = get_changed_values(key, dict_1, dict_2)
+            prop_desc["status"] = "changed"
+            prop_desc["values"] = get_changed_values(key, dict_1, dict_2)
 
-        dict_dif.append(prop_description)
+        dict_dif.append(prop_desc)
 
     for key in keys2:
         if key not in keys1:
-            prop_description = {"key": key}
-            prop_description["status"] = "added"
-            prop_description["values"] = get_dict_diff(dict_2[key], dict_2[key])\
+            prop_desc = {"key": key}
+            prop_desc["status"] = "added"
+            prop_desc["values"] = get_dict_diff(dict_2[key], dict_2[key])\
                 if isinstance(dict_2[key], dict)\
                 else {"current": dict_2[key]}
-            dict_dif.append(prop_description)
+            dict_dif.append(prop_desc)
 
     dict_dif.sort(key=lambda item: item["key"])
 
