@@ -25,7 +25,7 @@ def stylish(diff, level=1):
     for prop in diff:
         values = prop["values"]
         status = prop["status"]
-        prop_name = prop["name"]
+        prop_name = prop["key"]
         children = stylish(values, level + 1) if isinstance(values, list)\
             else None
 
@@ -36,7 +36,7 @@ def stylish(diff, level=1):
         else:
             if children:
                 result += f'{JSON_PREFIX["pristine"]}' \
-                          f'{prop["name"]}: {children}'
+                          f'{prop["key"]}: {children}'
             else:
                 initial_children = stylish(values["initial"], level + 1)\
                     if isinstance(values["initial"], list) \

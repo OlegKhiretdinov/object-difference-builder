@@ -22,7 +22,7 @@ def plain(diff, parent_name=""):
     result = []
     for prop in diff:
         status = prop["status"]
-        name = f'{parent_name}{"." if parent_name else ""}{prop["name"]}'
+        name = f'{parent_name}{"." if parent_name else ""}{prop["key"]}'
         values = prop["values"]
 
         if status == "deleted":

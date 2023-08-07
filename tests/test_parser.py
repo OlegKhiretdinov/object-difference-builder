@@ -1,5 +1,5 @@
 import pytest
-from gendiff.parser import parser
+from gendiff.parser import parse
 
 
 @pytest.fixture(params=["json", "yml"])
@@ -10,4 +10,4 @@ def parser_params(request):
 
 def test_parser(parser_params, dict_1):
     data, ext = parser_params
-    assert parser(data, ext) == dict_1
+    assert parse(data, ext) == dict_1

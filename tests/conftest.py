@@ -4,88 +4,88 @@ import pytest
 @pytest.fixture()
 def diff_example():
     return [
-        {'name': 'common',
+        {'key': 'common',
          'status': 'changed',
          'values': [
              {
-                 'name': 'follow',
+                 'key': 'follow',
                  'status': 'added',
                  'values': {'current': False}
              },
              {
-                 'name': 'setting1',
+                 'key': 'setting1',
                  'status': 'pristine',
                  'values': {'initial': 'Value 1'}
              },
              {
-                 'name': 'setting2',
+                 'key': 'setting2',
                  'status': 'deleted',
                  'values': {'initial': 200}
              },
              {
-                 'name': 'setting3',
+                 'key': 'setting3',
                  'status': 'changed',
                  'values': {'initial': True, 'current': None}},
              {
-                 'name': 'setting4',
+                 'key': 'setting4',
                  'status': 'added',
                  'values': {'current': 'blah blah'}
              },
              {
-                 'name': 'setting5',
+                 'key': 'setting5',
                  'status': 'added',
                  'values': [
-                     {'name': 'key5',
+                     {'key': 'key5',
                       'status': 'pristine',
                       'values': {'initial': 'value5'}
                       }
                  ]
              },
              {
-                 'name': 'setting6',
+                 'key': 'setting6',
                  'status': 'changed',
                  'values': [
                      {
-                         'name': 'doge',
+                         'key': 'doge',
                          'status': 'changed',
                          'values': [
-                             {'name': 'wow',
+                             {'key': 'wow',
                               'status': 'changed',
                               'values': {'initial': '', 'current': 'so much'}
                               }
                          ]
                      },
                      {
-                         'name': 'key',
+                         'key': 'key',
                          'status': 'pristine',
                          'values': {'initial': 'value'}
                      },
                      {
-                         'name': 'ops',
+                         'key': 'ops',
                          'status': 'added',
                          'values': {'current': 'vops'}}
                  ]
              }
          ]},
-        {'name': 'group1',
+        {'key': 'group1',
          'status': 'changed',
          'values': [
              {
-                 'name': 'baz',
+                 'key': 'baz',
                  'status': 'changed',
                  'values': {'initial': 'bas', 'current': 'bars'}
              },
              {
-                 'name': 'foo',
+                 'key': 'foo',
                  'status': 'pristine',
                  'values': {'initial': 'bar'}
              },
              {
-                 'name': 'nest',
+                 'key': 'nest',
                  'status': 'changed',
                  'values': {
                      'initial': [
-                         {'name': 'key',
+                         {'key': 'key',
                           'status': 'pristine',
                           'values': {'initial': 'value'}
                           }
@@ -95,19 +95,19 @@ def diff_example():
              }
          ]},
         {
-            'name': 'group2',
+            'key': 'group2',
             'status': 'deleted',
             'values': [
                 {
-                    'name': 'abc',
+                    'key': 'abc',
                     'status': 'pristine',
                     'values': {'initial': 12345}
                 },
                 {
-                    'name': 'deep',
+                    'key': 'deep',
                     'status': 'pristine',
                     'values': [
-                        {'name': 'id',
+                        {'key': 'id',
                          'status': 'pristine',
                          'values': {'initial': 45}
                          }
@@ -116,17 +116,17 @@ def diff_example():
             ]
         },
         {
-            'name': 'group3',
+            'key': 'group3',
             'status': 'added',
             'values': [
                 {
-                    'name': 'deep',
+                    'key': 'deep',
                     'status': 'pristine',
                     'values': [
-                        {'name': 'id',
+                        {'key': 'id',
                          'status': 'pristine',
                          'values': [
-                             {'name': 'number',
+                             {'key': 'number',
                               'status': 'pristine',
                               'values': {'initial': 45}
                               }
@@ -134,7 +134,7 @@ def diff_example():
                     ]
                 },
                 {
-                    'name': 'fee',
+                    'key': 'fee',
                     'status': 'pristine',
                     'values': {'initial': 100500}
                 }
@@ -147,27 +147,27 @@ def diff_example():
 def diff_example_2():
     return [
         {
-            'name': 'follow',
+            'key': 'follow',
             'status': 'deleted',
             'values': {'initial': False}
         },
         {
-            'name': 'host',
+            'key': 'host',
             'status': 'pristine',
             'values': {'initial': 'hexlet.io'}
         },
         {
-            'name': 'proxy',
+            'key': 'proxy',
             'status': 'deleted',
             'values': {'initial': '123.234.53.22'}
         },
         {
-            'name': 'timeout',
+            'key': 'timeout',
             'status': 'changed',
             'values': {'initial': 50, 'current': 20}
         },
         {
-            'name': 'verbose',
+            'key': 'verbose',
             'status': 'added',
             'values': {'current': True}
         }

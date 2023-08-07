@@ -1,5 +1,5 @@
 from gendiff.get_dict_diff import get_dict_diff
-from gendiff.parser import parser
+from gendiff.parser import parse
 from gendiff.diff_converter.stylish import stylish
 from gendiff.diff_converter.plain import plain
 from gendiff.diff_converter.to_json import to_json
@@ -7,7 +7,7 @@ from gendiff.diff_converter.to_json import to_json
 
 def get_file_content(path):
     with open(path) as f:
-        parsed_data = parser(f.read(), path.split(".")[-1])
+        parsed_data = parse(f.read(), path.split(".")[-1])
     return parsed_data
 
 
