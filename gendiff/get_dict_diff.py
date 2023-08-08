@@ -61,31 +61,36 @@ def get_dict_diff(dict_1, dict_2):
     dict_dif = []
 
     for key in keys1:
-        prop_desc = {"key": key}
+        prop = {"key": key}
+        is_value_dict = isinstance(dict_1[key], dict)
         if key not in keys2:
-            prop_desc["status"] = DELETED
-            prop_desc["values"] = get_dict_diff(dict_1[key], dict_1[key])\
-                if isinstance(dict_1[key], dict)\
-                else {"initial": dict_1[key]}
+            prop["status"] = DELETED
+            match is_value_dict:
+                case True:
+                    prop["values"] = get_dict_diff(dict_1[key], dict_1[key])
+                case False:
+                    prop["values"] = {"initial": dict_1[key]}
         elif dict_1[key] == dict_2[key]:
-            prop_desc["status"] = PRISTINE
-            prop_desc["values"] = get_dict_diff(dict_1[key], dict_2[key])\
-                if isinstance(dict_1[key], dict)\
-                else {"initial": dict_1[key]}
+            prop["status"] = PRISTINE
+            match is_value_dict:
+                case True:
+                    prop["values"] = get_dict_diff(dict_1[key], dict_2[key])
+                case False:
+                    prop["values"] = {"initial": dict_1[key]}
         else:
-            prop_desc["status"] = CHANGED
-            prop_desc["values"] = get_changed_values(key, dict_1, dict_2)
+            prop["status"] = CHANGED
+            prop["values"] = get_changed_values(key, dict_1, dict_2)
 
-        dict_dif.append(prop_desc)
+        dict_dif.append(prop)
 
     for key in keys2:
         if key not in keys1:
-            prop_desc = {"key": key}
-            prop_desc["status"] = ADDED
-            prop_desc["values"] = get_dict_diff(dict_2[key], dict_2[key])\
+            prop = {"key": key}
+            prop["status"] = ADDED
+            prop["values"] = get_dict_diff(dict_2[key], dict_2[key])\
                 if isinstance(dict_2[key], dict)\
                 else {"current": dict_2[key]}
-            dict_dif.append(prop_desc)
+            dict_dif.append(prop)
 
     dict_dif.sort(key=lambda item: item["key"])
 
